@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lumina Store</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .product-grid { display: flex; gap: 20px; flex-wrap: wrap; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); width: 200px; }
+        .btn { background: #007bff; color: white; padding: 10px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px;}
+    </style>
+</head>
+<body>
+    <h1>Lumina E-Commerce</h1>
+    <a href="{% url 'cart' %}" class="btn">View Cart</a>
+    <hr>
+    
+    <div class="product-grid">
+        {% for product in products %}
+        <div class="card">
+            <h3>{{ product.name }}</h3>
+            <p><strong>Price:</strong> ${{ product.price }}</p>
+            <button class="btn">Add to Cart</button>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

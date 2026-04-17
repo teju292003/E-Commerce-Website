@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Cart</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .btn { background: #007bff; color: white; padding: 10px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px;}
+        .btn-success { background: #28a745; }
+        table { background: white; width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+    </style>
+</head>
+<body>
+    <h1>Your Shopping Cart</h1>
+    <a href="{% url 'store' %}" class="btn">Back to Store</a>
+    <hr>
+    
+    <h3>Total Items: {{ order.get_cart_items }}</h3>
+    <h3>Total Price: ${{ order.get_cart_total|floatformat:2 }}</h3>
+    
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>${{ item.product.price|floatformat:2 }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.get_total|floatformat:2 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to Checkout</a>
+</body>
+</html>
